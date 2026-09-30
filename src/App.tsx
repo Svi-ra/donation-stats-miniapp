@@ -39,30 +39,21 @@ function Dashboard() {
   const max = latest > today ? latest : today;
 
   const amounts = new Map(monthData?.donations.map((d) => [d.donorId, d.amount]));
-  // Active donors always appear, even with 0. A deactivated donor still
-  // appears in the months they actually donated in, so history adds up.
-  const rows: DonorAmount[] = (overview?.donors ?? [])
-    .filter((donor) => donor.active || (amounts.get(donor.id) ?? 0) > 0)
-    .map((donor) => ({
-      id: donor.id,
-      name: donor.name,
-      amount: monthData ? (amounts.get(donor.id) ?? 0) : null,
-    }));
+  // Only donors who gave something in the selected month are listed, in their
+  // configured order. That includes deactivated donors, so history adds up.
+  const rows: DonorAmount[] | null =
+    overview && monthData
+      ? overview.donors
+          .map((donor) => ({ id: donor.id, name: donor.name, amount: amounts.get(donor.id) ?? 0 }))
+          .filter((row) => row.amount > 0)
+      : null;
   const monthTotal = monthData ? monthData.donations.reduce((sum, d) => sum + d.amount, 0) : null;
 
   return (
     <>
       <AllTimeTotal total={overview?.allTimeTotal ?? null} />
       <MonthSelector month={month} today={today} min={min} max={max} onChange={setMonth} />
-      {overview ? (
-        <DonorList month={month} rows={rows} total={monthTotal} />
-      ) : (
-        <section className="card" aria-busy="true">
-          <p className="empty">
-            <span className="skeleton skeleton-line" aria-label={t.loading} />
-          </p>
-        </section>
-      )}
+      <DonorList month={month} rows={rows} total={monthTotal} />
       <Expenses expenses={monthData?.expenses ?? null} />
       <Archive months={months.filter((m) => m !== today)} selected={month} onSelect={selectMonth} />
     </>

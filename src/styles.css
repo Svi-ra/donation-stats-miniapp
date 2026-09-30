@@ -225,11 +225,6 @@ summary:focus-visible {
   white-space: nowrap;
 }
 
-.amount-zero {
-  font-weight: 400;
-  color: var(--hint);
-}
-
 .row-total {
   border-top: 1px solid var(--separator);
   font-weight: 600;
@@ -327,12 +322,6 @@ summary:focus-visible {
 .skeleton-total {
   width: 120px;
   height: 24px;
-}
-
-.skeleton-amount {
-  flex: none;
-  width: 64px;
-  height: 16px;
 }
 
 .skeleton-line {

@@ -131,7 +131,7 @@ on conflict (donor_id, month) do update set amount = excluded.amount;
 
 ### Starting a new month
 
-Do nothing. Nothing is reset or deleted: a new month simply has no rows yet, so every donor shows `0` until you add that month's amounts. Earlier months stay in the archive.
+Do nothing. Nothing is reset or deleted: a new month simply has no rows yet, so the app shows "No donations this month" until you add that month's amounts. Earlier months stay in the archive.
 
 ### Add an expense
 
@@ -139,13 +139,9 @@ Do nothing. Nothing is reset or deleted: a new month simply has no rows yet, so 
 insert into public.expenses (month, name, amount) values ('2026-10', 'Printing', 25);
 ```
 
-### Remove a donor from the list
+### Donors who stop giving
 
-```sql
-update public.donors set active = false where name = 'Alex';
-```
-
-The donor disappears from current months but still shows in past months where they donated, so old totals keep adding up. (Donors with donation history cannot be deleted outright — that is deliberate.)
+Nothing to do: a donor is listed only in the months they gave in. Donors with donation history cannot be deleted (deliberate, so old totals keep adding up). The `active` column is not used by the app at present.
 
 ## 6. Configuration
 
@@ -178,7 +174,7 @@ curl -X POST "https://xxxxxxxx.supabase.co/rest/v1/expenses" -H "apikey: <ANON_K
 - **Queries:** on open — total, donors, available months, plus donations and expenses for the current month. Changing month fetches only that month's donations and expenses; months already viewed are kept in memory.
 - **Month navigation** is limited to the range between the earliest month with data and the current month, so users cannot wander into empty future months. If a future month does contain data (entered early or by mistake), it becomes reachable.
 - The "current month" is taken from the phone's clock.
-- A donor with no row for a month is shown as `0`.
+- The monthly list shows only donors with an amount above 0 for that month, in `display_order`.
 
 ## Project documentation
 

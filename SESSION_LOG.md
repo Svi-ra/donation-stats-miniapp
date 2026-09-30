@@ -2,6 +2,21 @@
 
 One entry per working session, newest first. An entry records what the session did, what was tested, what was left unfinished and what comes next. Details are not repeated here: changes are in [CHANGELOG.md](CHANGELOG.md), reasons in [DECISIONS.md](DECISIONS.md), open work in [ROADMAP.md](ROADMAP.md).
 
+## 2026-09-30 — Monthly list shows only actual donors
+
+**Done**
+
+- Donors without a donation in the selected month are no longer listed (CHANGELOG Unreleased, D-014).
+
+**Tested**
+
+- `npm run build` passes.
+- Local dev server against the live database: August lists the four donors in order with a 700 MDL total; September shows 0 MDL and "No donations this month" with no donor rows; all-time total, expenses, archive and navigation unchanged.
+
+**Not tested / unfinished**
+
+- A month where only some donors gave (no such month exists in the data yet).
+
 ## 2026-09-30 — Russian and Romanian interface
 
 **Done**

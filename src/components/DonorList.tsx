@@ -5,27 +5,22 @@ import { formatMonthName } from '../lib/month';
 export interface DonorAmount {
   id: number;
   name: string;
-  /** null while the month is loading */
-  amount: number | null;
+  amount: number;
 }
 
 interface Props {
   month: string;
-  rows: DonorAmount[];
+  /** Donors who gave in this month; null while loading */
+  rows: DonorAmount[] | null;
   /** null while the month is loading */
   total: number | null;
-}
-
-function Amount({ value }: { value: number | null }) {
-  if (value === null) return <span className="skeleton skeleton-amount" aria-label={t.loading} />;
-  return <span className={value === 0 ? 'amount amount-zero' : 'amount'}>{formatAmount(value)}</span>;
 }
 
 function DonorRow({ row }: { row: DonorAmount }) {
   return (
     <li className="row">
       <span className="row-name">{row.name}</span>
-      <Amount value={row.amount} />
+      <span className="amount">{formatAmount(row.amount)}</span>
     </li>
   );
 }
@@ -39,10 +34,13 @@ export function DonorList({ month, rows, total }: Props) {
         <p className="summary-total">
           {total === null ? <span className="skeleton skeleton-total" aria-label={t.loading} /> : formatAmount(total)}
         </p>
-        {total === 0 && <p className="hint">{t.noDonations}</p>}
       </div>
-      {rows.length === 0 ? (
-        <p className="empty">{t.noDonors}</p>
+      {rows === null ? (
+        <p className="empty">
+          <span className="skeleton skeleton-line" aria-label={t.loading} />
+        </p>
+      ) : rows.length === 0 ? (
+        <p className="empty">{t.noDonations}</p>
       ) : (
         <ul className="rows">
           {rows.map((row) => (

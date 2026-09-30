@@ -14,7 +14,6 @@ interface Strings {
   /** Receives the month name in lower case, e.g. "september". */
   monthDonations: (monthName: string) => string;
   noDonations: string;
-  noDonors: string;
   expenses: string;
   noExpenses: string;
   totalExpenses: string;
@@ -40,7 +39,6 @@ const strings: Record<Language, Strings> = {
     backToCurrentMonth: 'Back to current month',
     monthDonations: (monthName) => `${capitalize(monthName)} donations`,
     noDonations: 'No donations this month',
-    noDonors: 'No donors yet',
     expenses: 'Expenses',
     noExpenses: 'No expenses this month',
     totalExpenses: 'Total expenses',
@@ -62,7 +60,6 @@ const strings: Record<Language, Strings> = {
     backToCurrentMonth: 'К текущему месяцу',
     monthDonations: (monthName) => `Пожертвования за ${monthName}`,
     noDonations: 'В этом месяце пожертвований нет',
-    noDonors: 'Список доноров пуст',
     expenses: 'Расходы',
     noExpenses: 'В этом месяце расходов нет',
     totalExpenses: 'Всего расходов',
@@ -84,7 +81,6 @@ const strings: Record<Language, Strings> = {
     backToCurrentMonth: 'Înapoi la luna curentă',
     monthDonations: (monthName) => `Donații în ${monthName}`,
     noDonations: 'Nicio donație în această lună',
-    noDonors: 'Încă nu există donatori',
     expenses: 'Cheltuieli',
     noExpenses: 'Nicio cheltuială în această lună',
     totalExpenses: 'Total cheltuieli',

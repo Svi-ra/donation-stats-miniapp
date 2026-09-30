@@ -12,6 +12,7 @@ Why something was done lives in [DECISIONS.md](DECISIONS.md); what is still to d
 
 ### Changed
 
+- The monthly donor list shows only donors who gave in the selected month; donors with nothing that month are no longer listed with `0`. A month without donations shows "No donations this month" instead of a list.
 - `src/config.ts`: `LOCALE` replaced by `DEFAULT_LANGUAGE` (used when the user's language is not one of the three).
 
 - Deployment: GitHub Actions builds and publishes the site on every push to `main`.
