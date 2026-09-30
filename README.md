@@ -177,6 +177,13 @@ curl -X POST "https://xxxxxxxx.supabase.co/rest/v1/expenses" -H "apikey: <ANON_K
 - The "current month" is taken from the phone's clock.
 - A donor with no row for a month is shown as `0`.
 
+## Project documentation
+
+- [CHANGELOG.md](CHANGELOG.md) — what has changed
+- [DECISIONS.md](DECISIONS.md) — why things are the way they are
+- [ROADMAP.md](ROADMAP.md) — planned work, known issues, ideas
+- [SESSION_LOG.md](SESSION_LOG.md) — per-session record of work and testing
+
 ## Out of scope (by design)
 
 Accounts, payments, admin UI, user-submitted data, expense categories, analytics. The schema leaves room for an admin interface later (donors / monthly donations / expenses map one-to-one to tables).
