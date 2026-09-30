@@ -1,0 +1,341 @@
+/* Colours come from Telegram's theme (--tg-theme-*), with fallbacks for a
+   normal browser that follow the system light/dark setting. */
+:root {
+  --fb-bg: #efeff4;
+  --fb-card: #ffffff;
+  --fb-text: #000000;
+  --fb-hint: #6d6d72;
+  --fb-accent: #2481cc;
+  --fb-accent-text: #ffffff;
+
+  --bg: var(--tg-theme-secondary-bg-color, var(--fb-bg));
+  --card: var(--tg-theme-section-bg-color, var(--tg-theme-bg-color, var(--fb-card)));
+  --text: var(--tg-theme-text-color, var(--fb-text));
+  --hint: var(--tg-theme-hint-color, var(--fb-hint));
+  --accent: var(--tg-theme-link-color, var(--fb-accent));
+  --button: var(--tg-theme-button-color, var(--fb-accent));
+  --button-text: var(--tg-theme-button-text-color, var(--fb-accent-text));
+  --separator: var(--tg-theme-section-separator-color, rgba(128, 128, 128, 0.22));
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fb-bg: #0f0f0f;
+    --fb-card: #1c1c1e;
+    --fb-text: #ffffff;
+    --fb-hint: #98989e;
+    --fb-accent: #6ab3f3;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.app {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 8px max(16px, env(safe-area-inset-right)) calc(24px + var(--tg-safe-area-inset-bottom, env(safe-area-inset-bottom, 0px)))
+    max(16px, env(safe-area-inset-left));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ---- All-time total ---------------------------------------------------- */
+
+.hero {
+  padding: 28px 0 20px;
+  text-align: center;
+}
+
+.hero-label,
+.hero-caption,
+.card-title,
+.archive-summary {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--hint);
+}
+
+.hero-amount {
+  margin: 6px 0 4px;
+  font-size: clamp(40px, 13vw, 60px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.hero-currency {
+  font-size: 0.45em;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--hint);
+}
+
+/* ---- Month selector ---------------------------------------------------- */
+
+.month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.month-arrow {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--accent);
+  font-size: 26px;
+  line-height: 1;
+  padding-bottom: 4px;
+}
+
+.month-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.month-current {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+.month-label {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.link-button {
+  padding: 6px 8px;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+/* ---- Cards and rows ---------------------------------------------------- */
+
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.summary {
+  padding: 16px 16px 14px;
+  border-bottom: 1px solid var(--separator);
+}
+
+.card-title-padded {
+  padding: 16px 16px 6px;
+}
+
+.summary-total {
+  margin-top: 4px;
+  font-size: 28px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.hint {
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--hint);
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  min-height: 48px;
+  padding: 13px 16px;
+  text-align: left;
+}
+
+.rows > li + li {
+  border-top: 1px solid var(--separator);
+}
+
+.row-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.amount {
+  flex: none;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.amount-zero {
+  font-weight: 400;
+  color: var(--hint);
+}
+
+.row-total {
+  border-top: 1px solid var(--separator);
+  font-weight: 600;
+}
+
+.empty {
+  padding: 14px 16px 18px;
+  color: var(--hint);
+}
+
+/* ---- Archive ----------------------------------------------------------- */
+
+.archive-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 0 16px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.archive-summary::-webkit-details-marker {
+  display: none;
+}
+
+.archive-summary::after {
+  content: '›';
+  font-size: 20px;
+  transform: rotate(90deg);
+}
+
+.archive[open] .archive-summary::after {
+  transform: rotate(-90deg);
+}
+
+.archive[open] .archive-summary {
+  border-bottom: 1px solid var(--separator);
+}
+
+.archive-item {
+  align-items: center;
+}
+
+.archive-item[aria-current='true'] {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.archive-mark {
+  color: var(--hint);
+}
+
+.archive-item[aria-current='true'] .archive-mark {
+  color: var(--accent);
+}
+
+/* ---- Notices ----------------------------------------------------------- */
+
+.notice {
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.notice-title {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.primary-button {
+  margin-top: 16px;
+  min-height: 48px;
+  padding: 0 28px;
+  border-radius: 10px;
+  background: var(--button);
+  color: var(--button-text);
+  font-weight: 600;
+}
+
+/* ---- Loading placeholders ---------------------------------------------- */
+
+.skeleton {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 6px;
+  background: var(--hint);
+  opacity: 0.2;
+}
+
+.skeleton-hero {
+  width: 60%;
+  height: 0.8em;
+}
+
+.skeleton-total {
+  width: 120px;
+  height: 24px;
+}
+
+.skeleton-amount {
+  flex: none;
+  width: 64px;
+  height: 16px;
+}
+
+.skeleton-line {
+  width: 55%;
+  height: 16px;
+}
