@@ -1,8 +1,9 @@
-import { CURRENCY, LOCALE } from '../config';
+import { CURRENCY } from '../config';
+import { locale } from '../i18n';
 
-const numberFormat = new Intl.NumberFormat(LOCALE, { maximumFractionDigits: 2 });
+const numberFormat = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
 
-/** 1250 -> "1,250" */
+/** 1250 -> "1,250" (grouping follows the interface language) */
 export function formatNumber(amount: number): string {
   return numberFormat.format(amount);
 }

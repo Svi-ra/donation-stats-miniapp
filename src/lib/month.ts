@@ -1,4 +1,4 @@
-import { LOCALE } from '../config';
+import { locale } from '../i18n';
 
 // Months are "YYYY-MM" strings everywhere (same as the database),
 // so plain string comparison orders them correctly.
@@ -18,20 +18,16 @@ export function shiftMonth(month: string, delta: number): string {
   return toKey(date.getFullYear(), date.getMonth());
 }
 
-const longFormat = new Intl.DateTimeFormat(LOCALE, { month: 'long', year: 'numeric' });
-const nameFormat = new Intl.DateTimeFormat(LOCALE, { month: 'long' });
+const nameFormat = new Intl.DateTimeFormat(locale, { month: 'long' });
 
-function toDate(month: string): Date {
-  const [year, m] = month.split('-').map(Number);
-  return new Date(year, m - 1, 1);
-}
-
-/** "2026-09" -> "September 2026" */
-export function formatMonth(month: string): string {
-  return longFormat.format(toDate(month));
-}
-
-/** "2026-09" -> "September" */
+/** "2026-09" -> "september" / "сентябрь" / "septembrie" (lower case, nominative) */
 export function formatMonthName(month: string): string {
-  return nameFormat.format(toDate(month));
+  const [year, m] = month.split('-').map(Number);
+  return nameFormat.format(new Date(year, m - 1, 1)).toLowerCase();
+}
+
+/** "2026-09" -> "September 2026" / "Сентябрь 2026" / "Septembrie 2026" */
+export function formatMonth(month: string): string {
+  const name = formatMonthName(month);
+  return `${name.charAt(0).toUpperCase()}${name.slice(1)} ${month.slice(0, 4)}`;
 }

@@ -18,6 +18,7 @@ Rules: entries are numbered and never renumbered or deleted. A decision that no 
 | [D-010](#d-010-the-group-opens-the-app-through-a-direct-tme-link) | The group opens the app through a direct `t.me` link | Accepted |
 | [D-011](#d-011-typescript-strict-mode-is-the-only-lint) | TypeScript strict mode is the only lint | Accepted |
 | [D-012](#d-012-github-pages-deployed-by-github-actions) | GitHub Pages deployed by GitHub Actions | Accepted |
+| [D-013](#d-013-interface-language-follows-telegram-no-i18n-library) | Interface language follows Telegram, no i18n library | Accepted |
 
 ---
 
@@ -116,3 +117,11 @@ Rules: entries are numbered and never renumbered or deleted. A decision that no 
 **Context:** The owner granted the `workflow` scope and switched the Pages source to GitHub Actions, removing the reason for the local script.
 **Decision:** `.github/workflows/deploy.yml` builds and publishes on every push to `main` (and on manual dispatch). The Supabase URL and publishable key are repository Actions *variables*, since both are public. Vite keeps `base: './'` for the sub-path.
 **Consequences:** No local step or `.env.local` needed to deploy; every push to `main` goes live, including documentation-only commits. The local deploy script was removed.
+
+## D-013: Interface language follows Telegram, no i18n library
+
+2026-09-30 · Accepted
+
+**Context:** Group members use Telegram in Russian, Romanian or English. The app has about twenty strings and must stay small.
+**Decision:** A single typed dictionary in `src/i18n.ts` for `en`, `ru`, `ro`. The language is chosen once at launch: `?lang=` in the URL, then `Telegram.WebApp.initDataUnsafe.user.language_code`, then the browser language, then `DEFAULT_LANGUAGE` (`en`). Month names and number grouping come from `Intl` for that language. There is no in-app language switch.
+**Consequences:** No dependency and about 1 kB added. The Telegram language code is read but never stored or sent anywhere. Donor and expense names are shown as entered in the database, untranslated. Adding a language means adding one dictionary; TypeScript flags missing keys.

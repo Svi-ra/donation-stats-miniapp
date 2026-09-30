@@ -7,6 +7,7 @@ import { Expenses } from './components/Expenses';
 import { MonthSelector } from './components/MonthSelector';
 import { Notice } from './components/Notice';
 import { useDashboard } from './hooks/useDashboard';
+import { t } from './i18n';
 import { currentMonth } from './lib/month';
 import { isSupabaseConfigured } from './lib/supabase';
 
@@ -24,11 +25,7 @@ function Dashboard() {
     return (
       <>
         <AllTimeTotal total={overview?.allTimeTotal ?? null} />
-        <Notice
-          title="Couldn't load the statistics"
-          text="Check your internet connection and try again."
-          onRetry={retry}
-        />
+        <Notice title={t.errorTitle} text={t.errorText} onRetry={retry} />
       </>
     );
   }
@@ -62,7 +59,7 @@ function Dashboard() {
       ) : (
         <section className="card" aria-busy="true">
           <p className="empty">
-            <span className="skeleton skeleton-line" aria-label="Loading" />
+            <span className="skeleton skeleton-line" aria-label={t.loading} />
           </p>
         </section>
       )}
@@ -78,10 +75,7 @@ export function App() {
       {isSupabaseConfigured ? (
         <Dashboard />
       ) : (
-        <Notice
-          title="App is not configured"
-          text="VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are missing. See the README."
-        />
+        <Notice title={t.notConfiguredTitle} text={t.notConfiguredText} />
       )}
     </main>
   );

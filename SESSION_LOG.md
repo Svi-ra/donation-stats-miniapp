@@ -2,6 +2,25 @@
 
 One entry per working session, newest first. An entry records what the session did, what was tested, what was left unfinished and what comes next. Details are not repeated here: changes are in [CHANGELOG.md](CHANGELOG.md), reasons in [DECISIONS.md](DECISIONS.md), open work in [ROADMAP.md](ROADMAP.md).
 
+## 2026-09-30 — Russian and Romanian interface
+
+**Done**
+
+- Added `ru` and `ro` translations with automatic language selection (CHANGELOG Unreleased, D-013).
+
+**Tested**
+
+- `npm run build` passes.
+- Local dev server at phone width against the live database: `?lang=ru` and `?lang=ro` translate every label, the page title, month names and the archive, with no horizontal overflow; without `?lang=` an English browser gets English.
+
+**Not tested / unfinished**
+
+- Detection from Telegram's language inside Telegram; native-speaker review of the texts (see ROADMAP).
+
+**Next steps**
+
+- Open the deployed app in Telegram with Russian and Romanian interface languages.
+
 ## 2026-09-30 — First real data
 
 **Done**

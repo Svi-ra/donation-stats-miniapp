@@ -5,12 +5,18 @@ interface TelegramWebApp {
   isVersionAtLeast(version: string): boolean;
   setHeaderColor(color: string): void;
   setBackgroundColor(color: string): void;
+  initDataUnsafe?: { user?: { language_code?: string } };
 }
 
 declare global {
   interface Window {
     Telegram?: { WebApp?: TelegramWebApp };
   }
+}
+
+/** The user's Telegram interface language (e.g. "ru"), or undefined outside Telegram. Read only, never stored. */
+export function telegramLanguage(): string | undefined {
+  return window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code;
 }
 
 /**

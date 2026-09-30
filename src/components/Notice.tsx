@@ -1,3 +1,5 @@
+import { t } from '../i18n';
+
 interface Props {
   title: string;
   text: string;
@@ -11,7 +13,7 @@ export function Notice({ title, text, onRetry }: Props) {
       <p className="hint">{text}</p>
       {onRetry && (
         <button type="button" className="primary-button" onClick={onRetry}>
-          Try again
+          {t.retry}
         </button>
       )}
     </section>

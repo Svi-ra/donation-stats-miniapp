@@ -152,8 +152,12 @@ The donor disappears from current months but still shows in past months where th
 [`src/config.ts`](src/config.ts):
 
 - `CURRENCY` — label after every amount (`MDL`).
-- `LOCALE` — number grouping and month names (`en-US` → `1,250`, `September 2026`).
+- `DEFAULT_LANGUAGE` — interface language when the user's language is not English, Russian or Romanian.
 - `REQUEST_TIMEOUT_MS` — how long to wait before showing the error/retry screen.
+
+### Languages
+
+The interface is available in English, Russian and Romanian ([`src/i18n.ts`](src/i18n.ts)). It follows the user's Telegram interface language, then the browser language. Append `?lang=ru`, `?lang=ro` or `?lang=en` to the URL to force one. Donor and expense names are shown exactly as stored.
 
 ## 7. Security model
 

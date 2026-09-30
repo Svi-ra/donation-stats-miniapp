@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 import { formatAmount } from '../lib/format';
 import { formatMonthName } from '../lib/month';
 
@@ -16,7 +17,7 @@ interface Props {
 }
 
 function Amount({ value }: { value: number | null }) {
-  if (value === null) return <span className="skeleton skeleton-amount" aria-label="Loading" />;
+  if (value === null) return <span className="skeleton skeleton-amount" aria-label={t.loading} />;
   return <span className={value === 0 ? 'amount amount-zero' : 'amount'}>{formatAmount(value)}</span>;
 }
 
@@ -30,17 +31,18 @@ function DonorRow({ row }: { row: DonorAmount }) {
 }
 
 export function DonorList({ month, rows, total }: Props) {
+  const title = t.monthDonations(formatMonthName(month));
   return (
-    <section className="card" aria-label="Donations this month">
+    <section className="card" aria-label={title}>
       <div className="summary">
-        <h2 className="card-title">{formatMonthName(month)} donations</h2>
+        <h2 className="card-title">{title}</h2>
         <p className="summary-total">
-          {total === null ? <span className="skeleton skeleton-total" aria-label="Loading" /> : formatAmount(total)}
+          {total === null ? <span className="skeleton skeleton-total" aria-label={t.loading} /> : formatAmount(total)}
         </p>
-        {total === 0 && <p className="hint">No donations this month</p>}
+        {total === 0 && <p className="hint">{t.noDonations}</p>}
       </div>
       {rows.length === 0 ? (
-        <p className="empty">No donors yet</p>
+        <p className="empty">{t.noDonors}</p>
       ) : (
         <ul className="rows">
           {rows.map((row) => (

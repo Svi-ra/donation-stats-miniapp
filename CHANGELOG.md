@@ -6,7 +6,13 @@ Why something was done lives in [DECISIONS.md](DECISIONS.md); what is still to d
 
 ## [Unreleased]
 
+### Added
+
+- Russian and Romanian interface translations alongside English. The language follows the user's Telegram interface language, then the browser language; `?lang=en|ru|ro` in the URL overrides both. Month names and number grouping follow the chosen language.
+
 ### Changed
+
+- `src/config.ts`: `LOCALE` replaced by `DEFAULT_LANGUAGE` (used when the user's language is not one of the three).
 
 - Deployment: GitHub Actions builds and publishes the site on every push to `main`.
 

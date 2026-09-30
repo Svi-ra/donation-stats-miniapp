@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 import { formatMonth, shiftMonth } from '../lib/month';
 
 interface Props {
@@ -10,11 +11,11 @@ interface Props {
 
 export function MonthSelector({ month, today, min, max, onChange }: Props) {
   return (
-    <nav className="month-nav" aria-label="Month">
+    <nav className="month-nav" aria-label={t.month}>
       <button
         type="button"
         className="month-arrow"
-        aria-label="Previous month"
+        aria-label={t.previousMonth}
         disabled={month <= min}
         onClick={() => onChange(shiftMonth(month, -1))}
       >
@@ -26,14 +27,14 @@ export function MonthSelector({ month, today, min, max, onChange }: Props) {
         </span>
         {month !== today && (
           <button type="button" className="link-button" onClick={() => onChange(today)}>
-            Back to current month
+            {t.backToCurrentMonth}
           </button>
         )}
       </div>
       <button
         type="button"
         className="month-arrow"
-        aria-label="Next month"
+        aria-label={t.nextMonth}
         disabled={month >= max}
         onClick={() => onChange(shiftMonth(month, 1))}
       >

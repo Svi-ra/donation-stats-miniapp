@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 import { formatMonth } from '../lib/month';
 
 interface Props {
@@ -11,7 +12,7 @@ export function Archive({ months, selected, onSelect }: Props) {
   if (months.length === 0) return null;
   return (
     <details className="card archive">
-      <summary className="archive-summary">Archive</summary>
+      <summary className="archive-summary">{t.archive}</summary>
       <ul className="rows">
         {months.map((month) => (
           <li key={month}>

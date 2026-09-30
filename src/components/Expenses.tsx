@@ -1,4 +1,5 @@
 import type { Expense } from '../api/expenses';
+import { t } from '../i18n';
 import { formatAmount } from '../lib/format';
 
 interface Props {
@@ -17,14 +18,14 @@ function ExpenseRow({ expense }: { expense: Expense }) {
 
 export function Expenses({ expenses }: Props) {
   return (
-    <section className="card" aria-label="Expenses this month">
-      <h2 className="card-title card-title-padded">Expenses</h2>
+    <section className="card" aria-label={t.expenses}>
+      <h2 className="card-title card-title-padded">{t.expenses}</h2>
       {expenses === null ? (
         <p className="empty">
-          <span className="skeleton skeleton-line" aria-label="Loading" />
+          <span className="skeleton skeleton-line" aria-label={t.loading} />
         </p>
       ) : expenses.length === 0 ? (
-        <p className="empty">No expenses this month</p>
+        <p className="empty">{t.noExpenses}</p>
       ) : (
         <>
           <ul className="rows">
@@ -33,7 +34,7 @@ export function Expenses({ expenses }: Props) {
             ))}
           </ul>
           <div className="row row-total">
-            <span className="row-name">Total expenses</span>
+            <span className="row-name">{t.totalExpenses}</span>
             <span className="amount">
               {formatAmount(expenses.reduce((sum, expense) => sum + expense.amount, 0))}
             </span>
