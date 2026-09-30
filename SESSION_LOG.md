@@ -2,6 +2,20 @@
 
 One entry per working session, newest first. An entry records what the session did, what was tested, what was left unfinished and what comes next. Details are not repeated here: changes are in [CHANGELOG.md](CHANGELOG.md), reasons in [DECISIONS.md](DECISIONS.md), open work in [ROADMAP.md](ROADMAP.md).
 
+## 2026-09-30 — First real data
+
+**Done**
+
+- Entered the donors Вася, Виорика, Лия, Марк (display order 1–4) and their August 2026 amounts (100, 200, 200, 200) from a screenshot supplied by the owner. No expenses for August.
+
+**Tested**
+
+- Live site: all-time total 700 MDL; August shows the four amounts and a 700 MDL month total; September shows the four donors at 0.
+
+**Next steps**
+
+- September 2026 amounts and expenses (see ROADMAP).
+
 ## 2026-09-30 — Switch deployment to GitHub Actions
 
 **Done**

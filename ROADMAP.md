@@ -10,7 +10,7 @@ The three sections mean different things:
 
 ## Planned
 
-- [ ] Enter the real donor list (names in display order) and the amounts and expenses to date. Waiting for the list from the project owner.
+- [ ] Enter September 2026 amounts and any expenses. The four donors and their August 2026 amounts are in; later figures are waiting on the project owner.
 
 ## Known issues
 
@@ -19,6 +19,7 @@ The three sections mean different things:
 - The `gh-pages` branch on GitHub is a leftover from the earlier deploy method and is no longer used; it can be deleted.
 - Supabase's security advisor flags `public.rls_auto_enable()` as a `SECURITY DEFINER` function callable by anonymous users. It existed in the project before this app's migration and was left untouched; its purpose should be confirmed before changing it.
 - The bot token was pasted into a chat on 2026-09-30. It is not in the repository, but revoking it in BotFather (`/revoke`) is the safe option.
+- The deploy workflow's actions (`checkout@v4`, `setup-node@v4`, `upload-pages-artifact@v3`) target the deprecated Node.js 20 runtime; they still run, with a warning, and should be bumped.
 - No automated tests.
 
 ## Ideas
