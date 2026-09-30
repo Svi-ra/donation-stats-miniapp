@@ -2,6 +2,25 @@
 
 One entry per working session, newest first. An entry records what the session did, what was tested, what was left unfinished and what comes next. Details are not repeated here: changes are in [CHANGELOG.md](CHANGELOG.md), reasons in [DECISIONS.md](DECISIONS.md), open work in [ROADMAP.md](ROADMAP.md).
 
+## 2026-09-30 — Switch deployment to GitHub Actions
+
+**Done**
+
+- Replaced the local deploy script with a GitHub Actions workflow (CHANGELOG Unreleased, D-012).
+- Stored the Supabase URL and publishable key as repository Actions variables.
+
+**Tested**
+
+- The workflow run for the push completed and the live site loads data from Supabase afterwards.
+
+**Not tested / unfinished**
+
+- The unused `gh-pages` branch is still on GitHub.
+
+**Next steps**
+
+- Unchanged: enter the real donor data; check the dark theme in Telegram.
+
 ## 2026-09-30 — Initial build, publish and deploy
 
 **Done**

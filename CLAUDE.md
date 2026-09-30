@@ -25,7 +25,7 @@ Update the documentation that the session actually affected:
 
 - `npm run dev` — local dev server (needs `.env.local`, see `.env.example`)
 - `npm run build` — type-check and build; this is the only lint
-- `npm run deploy` — build and publish to the `gh-pages` branch
+- Deploy: pushing to `main` publishes the site through `.github/workflows/deploy.yml`
 
 ## Constraints
 

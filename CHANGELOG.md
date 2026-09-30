@@ -6,6 +6,14 @@ Why something was done lives in [DECISIONS.md](DECISIONS.md); what is still to d
 
 ## [Unreleased]
 
+### Changed
+
+- Deployment: GitHub Actions builds and publishes the site on every push to `main`.
+
+### Removed
+
+- `npm run deploy` and `scripts/deploy.mjs` (publishing through the `gh-pages` branch).
+
 ## [1.0.0] - 2026-09-30
 
 First public version, live at <https://svi-ra.github.io/donation-stats-miniapp/>.

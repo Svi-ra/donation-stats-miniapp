@@ -13,10 +13,11 @@ Rules: entries are numbered and never renumbered or deleted. A decision that no 
 | [D-005](#d-005-postgrest-js-instead-of-supabase-js) | `postgrest-js` instead of `supabase-js` | Accepted |
 | [D-006](#d-006-deactivated-donors-stay-visible-in-months-they-donated) | Deactivated donors stay visible in months they donated | Accepted |
 | [D-007](#d-007-month-navigation-is-bounded) | Month navigation is bounded | Accepted |
-| [D-008](#d-008-github-pages-deployed-from-a-local-script) | GitHub Pages deployed from a local script | Accepted |
+| [D-008](#d-008-github-pages-deployed-from-a-local-script) | GitHub Pages deployed from a local script | Superseded by D-012 |
 | [D-009](#d-009-no-sample-data-in-the-production-database) | No sample data in the production database | Accepted |
 | [D-010](#d-010-the-group-opens-the-app-through-a-direct-tme-link) | The group opens the app through a direct `t.me` link | Accepted |
 | [D-011](#d-011-typescript-strict-mode-is-the-only-lint) | TypeScript strict mode is the only lint | Accepted |
+| [D-012](#d-012-github-pages-deployed-by-github-actions) | GitHub Pages deployed by GitHub Actions | Accepted |
 
 ---
 
@@ -78,7 +79,7 @@ Rules: entries are numbered and never renumbered or deleted. A decision that no 
 
 ## D-008: GitHub Pages deployed from a local script
 
-2026-09-30 · Accepted
+2026-09-30 · Superseded by D-012
 
 **Context:** The available GitHub login lacks the `workflow` scope, so an Actions workflow cannot be pushed.
 **Decision:** `npm run deploy` builds locally (reading `.env.local`) and force-pushes `dist/` to `gh-pages`. Vite uses `base: './'` so the build works under the `/donation-stats-miniapp/` sub-path.
@@ -107,3 +108,11 @@ Rules: entries are numbered and never renumbered or deleted. A decision that no 
 **Context:** Minimal dependencies were a requirement.
 **Decision:** No ESLint; `tsc` with `strict`, `noUnusedLocals`, `noUnusedParameters` runs as part of `npm run build`.
 **Consequences:** No React-hooks lint rules. Reconsider if the codebase grows.
+
+## D-012: GitHub Pages deployed by GitHub Actions
+
+2026-09-30 · Accepted · supersedes D-008
+
+**Context:** The owner granted the `workflow` scope and switched the Pages source to GitHub Actions, removing the reason for the local script.
+**Decision:** `.github/workflows/deploy.yml` builds and publishes on every push to `main` (and on manual dispatch). The Supabase URL and publishable key are repository Actions *variables*, since both are public. Vite keeps `base: './'` for the sub-path.
+**Consequences:** No local step or `.env.local` needed to deploy; every push to `main` goes live, including documentation-only commits. The local deploy script was removed.
