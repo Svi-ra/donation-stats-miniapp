@@ -68,6 +68,14 @@ Other commands: `npm run typecheck`, `npm run build` (output in `dist/`), `npm r
 
 The build is plain static files, so any HTTPS static host works (Telegram requires HTTPS).
 
+**GitHub Pages (used by this project):** with `.env.local` filled in, run
+
+```bash
+npm run deploy
+```
+
+This builds the app and force-pushes `dist/` to the `gh-pages` branch of `origin`. One-time setup: repository **Settings → Pages → Deploy from a branch → `gh-pages` / root**. The site is served at `https://<user>.github.io/<repo>/`. Data changes in Supabase appear immediately; redeploy only after code changes.
+
 **Vercel / Netlify / Cloudflare Pages:** import the repository, then set
 
 | Setting | Value |
